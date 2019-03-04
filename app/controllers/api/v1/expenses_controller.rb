@@ -5,22 +5,61 @@ module Api
       respond_to :json
 
       def index
-        type_id = params[:type_id] unless params[:type_id] == ''
-        category_id = params[:category_id] unless params[:category_id] == ''
+        @expenses = Expense.all
 
-        if category_id == nil && type_id == nil
-          expenses = Expense.all.order(date: :desc)
+        if params[:type_id].present?
+          @expenses = @expenses.find_type_id(params[:type_id].to_i)
         end
-        if (category_id != nil && type_id != nil)
-          expenses = Expense.find_category(category_id).find_type(type_id).order(date: :desc)
+        
+        if params[:category_id].present?
+          @expenses = @expenses.find_category_id(params[:category_id].to_i)
         end
-        if (category_id != nil && type_id == nil)
-          expenses = Expense.find_category(category_id.to_i).order(date: :desc)
+
+        if params[:type].present?
+          @expenses = @expenses.find_type(params[:type].to_s.capitalize)
         end
-        if (category_id == nil && type_id != nil)
-          expenses = Expense.find_type(type_id.to_i).order(date: :desc)
+        
+        if params[:category].present?
+          @expenses = @expenses.find_category(params[:category].to_s.capitalize)
         end
-        render json: expenses
+
+        if params[:year].present?
+          @expenses = @expenses.find_year(params[:year].to_i)
+        end
+
+        if params[:month].present?
+          @expenses = @expenses.find_month(params[:month].to_i)
+        end
+
+        if params[:day].present?
+          @expenses = @expenses.find_day(params[:day].to_i)
+        end
+
+        if params[:beginDate].present?
+          @expenses = @expenses.find_by_begindate(params[:beginDate].to_date)
+        end
+
+        if params[:endDate].present?
+          @expenses = @expenses.find_by_enddate(params[:endDate].to_date)
+        end
+
+        if params[:concept].present?
+          @expenses = @expenses.find_by_concept(params[:concept].to_s)
+        end
+
+        if params[:page].present?
+          @expenses = @expenses.paginate(:page => params[:page], :per_page => 10)
+        end
+
+        if params[:startAmount].present?
+          @expenses = @expenses.find_by_startAmount(params[:startAmount].to_i)
+        end
+
+        if params[:endAmount].present?
+          @expenses = @expenses.find_by_endAmount(params[:endAmount].to_i)
+        end
+
+        render json: @expenses
       end
 
       def create

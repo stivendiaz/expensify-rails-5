@@ -9,22 +9,17 @@ class ExpensesController < ApplicationController
 
     @current_month = @months[params[:date].to_i]
 
-    type_id = params[:type_id] unless params[:type_id] == ''
-    category_id = params[:category_id] unless params[:category_id] == ''
     month = @current_month.month
     year = @current_month.year
 
-    if category_id == nil && type_id == nil
-      @expenses = Expense.find_year(year).find_month(month).order(date: :desc)
+    @expenses = Expense.find_year(year).find_month(month).order(date: :desc)
+
+    if params[:type_id].present?
+      @expenses = @expenses.find_type_id(params[:type_id].to_i)
     end
-    if (category_id != nil && type_id != nil)
-      @expenses = Expense.find_year(year).find_month(month).find_category(category_id).find_type(type_id).order(date: :desc)
-    end
-    if (category_id != nil && type_id == nil)
-      @expenses = Expense.find_year(year).find_month(month).find_category(category_id.to_i).order(date: :desc)
-    end
-    if (category_id == nil && type_id != nil)
-      @expenses = Expense.find_year(year).find_month(month).find_type(type_id.to_i).order(date: :desc)
+    
+    if params[:category_id].present?
+      @expenses = @expenses.find_category_id(params[:category_id].to_i)
     end
 
     respond_to do |format|
@@ -75,7 +70,6 @@ class ExpensesController < ApplicationController
     @old_amount = @expense.amount
     if @expense.update safe_params
       @alert_msg = 'Expense successfully updated'
-      # flash[:success] = "Expense successfully updated"
     else
       render :edit
     end
@@ -90,7 +84,6 @@ class ExpensesController < ApplicationController
     @expense = Expense.find params[:id]
     @expense.destroy
     @alert_msg = 'Expense successfully deleted'
-    # flash[:success] = "Expense successfully deleted"
   end
 
   protected
