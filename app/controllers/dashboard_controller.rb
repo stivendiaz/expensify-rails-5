@@ -191,7 +191,6 @@ class DashboardController < ApplicationController
           }
         ]
       }
-
       # end CHART-4 -------------------------------------------------
 
       #Build data object for chart 1
@@ -221,8 +220,6 @@ class DashboardController < ApplicationController
       end
       @options_2 = @options_2.to_json
 
-
-
       #Build data object for chart 3
       category_totals.each_with_index do |element, index|
         point = {y: element, indexLabel: "#{all_categories[index].name}"}
@@ -247,24 +244,24 @@ class DashboardController < ApplicationController
 
       @options_4 = @options_4.to_json
 
-    end
-
-    protected
-
-    def generate_dataPoints_chart_1 (typeId, l6months, totals)
-      result = []
-      n = l6months.length
-      n.times do |i|
-        result << {label: l6months[i].strftime('%b-%Y'), y: totals[l6months[i].strftime('%b-%Y')][typeId+1]}
-      end
-      result
-    end
-
-    def generate_dataPoints_chart_2 (typeId, month_days, totals)
-      result = []
-      month_days.times do |i|
-        result << {x: i+1, y: totals[i+1][typeId+1]}
-      end
-      result
-    end
   end
+
+  protected
+
+  def generate_dataPoints_chart_1 (typeId, l6months, totals)
+    result = []
+    n = l6months.length
+    n.times do |i|
+      result << {label: l6months[i].strftime('%b-%Y'), y: totals[l6months[i].strftime('%b-%Y')][typeId+1]}
+    end
+    result
+  end
+
+  def generate_dataPoints_chart_2 (typeId, month_days, totals)
+    result = []
+    month_days.times do |i|
+      result << {x: i+1, y: totals[i+1][typeId+1]}
+    end
+    result
+  end
+end
