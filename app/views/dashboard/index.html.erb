@@ -3,27 +3,27 @@
 <div class="container form-container">
   <div class="row">
     <div class="total-box col-md-3">
-      $<%=@today_amount%>
-      <span>HOY</span>
+      <%=number_to_currency(@today_amount, :unit => "$")%>
+      <span>Today</span>
     </div>
     <div class="total-box col-md-3">
-      $<%=@yesterday_amount%>
-      <span>AYER</span>
+      <%=number_to_currency(@yesterday_amount, :unit => "$")%>
+      <span>Yesterday</span>
     </div>
     <div class="total-box col-md-3">
-      $<%= @actual_month_amount %>
-      <span>ESTE MES</span>
+      <%= number_to_currency(@actual_month_amount, :unit => "$") %>
+      <span>This month</span>
     </div>
     <div class="total-box col-md-3">
-      $<%=@last_month_amount%>
-      <span>MES PASADO</span>
+      <%=number_to_currency(@last_month_amount, :unit => "$")%>
+      <span>Last month</span>
     </div>
   </div>
 
   <div class="row" style="margin-top: 40px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Últimos 6 Meses</div>
+        <div class="panel-heading">Last 6 months</div>
         <div class="panel-body">
           <%= content_tag :div, class: "monthly", data: {chart: @options_1} do%>
           <%end%>
@@ -33,7 +33,7 @@
     </div>
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Día Mes Actual</div>
+        <div class="panel-heading">By day of the current month</div>
         <div class="panel-body">
           <%= content_tag :div, class: "daily", data: {chart: @options_2} do %>
           <%end%>
@@ -46,7 +46,7 @@
   <div class="row" style="margin-top: 10px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Categoría</div>
+        <div class="panel-heading">By category</div>
         <div class="panel-body">
           <%= content_tag :div, class: "category", data: {chart: @options_3} do %>
           <%end%>
@@ -56,7 +56,7 @@
     </div>
     <div class=" box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Acumulado</div>
+        <div class="panel-heading">accumulated</div>
         <div class="panel-body">
           <%= content_tag :div, class: "accum", data: {chart: @options_4} do %>
           <%end%>

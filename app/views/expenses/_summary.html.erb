@@ -4,7 +4,7 @@
     <%@expenses.each do |i| %>
     <%total += i.amount%>
     <%end%>
-    <%=total%>
+    <%=number_to_currency(total, :unit => "$")%>
   </div>
   <div class="summary-label">Total</div>
 </diV>
@@ -13,6 +13,6 @@
   <div class="summary-label">Transactions</div>
 </div>
 <div class="summary-box col-md-4 text-center">
-  <div class="summary-value average"><%=tansactions == 0 ? 0 : total/tansactions %></div>
+  <div class="summary-value average"><%=tansactions == 0 ? 0 : number_to_currency(total/tansactions, :unit => "$") %></div>
   <div class="summary-label">Average</div>
 </div>
