@@ -13,7 +13,7 @@ For multiple filters you have to use "&" yo split the filters, example: https://
 
 #### Get requests:
 
-* Filter by category: %PATH%*__category__=[categoryName] ---> you get all registers by category name 
+* Filter by category: %PATH%__category__=[categoryName] ---> you get all registers by category name 
 
 * Filter by type: %PATH%__type__=[typeName] ---> you get all registers by type name 
 
