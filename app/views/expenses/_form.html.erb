@@ -1,10 +1,10 @@
 <table id="expenses-table" class="table table-hover" style="margin-top: 20px;">
   <thead>
     <tr>
-      <th class="text-center">Día</th>
-      <th>Concepto</th>
-      <th class="text-right">Categoría</th>
-      <th class="text-right">Valor</th>
+      <th class="text-center">Day</th>
+      <th>Concept</th>
+      <th class="text-right">Category</th>
+      <th class="text-right">Value</th>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +24,10 @@
       </td>
       <td class="category text-right"><%= @categories.find {|i| i.id == expense.category_id}.name%></td>
       <td class="text-right" style="width: 170px;">
-        <div class="amount"><%=expense.amount %></div>
+        <div class="amount"><%=number_to_currency(expense.amount, :unit => "$") %></div>
         <div class="actions">
-          <%=link_to "<span class='glyphicon glyphicon-edit'></span> edit".html_safe, edit_expense_path(expense.id), remote: true%>
-          <%=link_to "<span class='glyphicon glyphicon-trash'></span> delete".html_safe, expense_path(expense.id),:data => {:confirm => "You sure?",:method => "delete", remote: true} %>
+          <%=link_to "<span class='glyphicon glyphicon-edit'></span> edit".html_safe, edit_expense_path(expense.id), :class => "edit", remote: true%>
+          <%=link_to "<span class='glyphicon glyphicon-trash'></span> delete".html_safe, expense_path(expense.id), :class => "delete",:data => {:confirm => "You sure?",:method => "delete", remote: true} %>
           </div>
         </td>
       </tr>
