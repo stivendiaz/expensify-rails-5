@@ -6,35 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-c1 = Category.create(name: 'Car')
-c2 = Category.create(name: 'Food')
-c3 = Category.create(name: 'Gym')
-c4 = Category.create(name: 'Phone')
-c5 = Category.create(name: 'Nightlife')
+Category.create([{name: 'Car'},{name: 'Food'},{name: 'Gym'},{name: 'Phone'},{name: 'Nightlife'}])
 
-c1.save
-c2.save
-c3.save
-c4.save
-c5.save
+20.times do 
+  Category.create(name: Faker::Commerce.unique.department(1))
+end
 
-t1 = Type.create(name: 'Compra')
-t2 = Type.create(name: 'Retiro')
-t3 = Type.create(name: 'Transferencia')
-t4 = Type.create(name: 'Pago')
+Type.create([{name: 'Purchase'},{name: 'Retirement'},{name: 'Transfer'},{name: 'Payment'}])
 
-t1.save
-t2.save
-t3.save
-t4.save
-
-100.times do
+500.times do
   a = Expense.create(
     type_id: rand(1..Type.count),
     category_id: rand(1..Category.count),
-    concept: Faker::HowIMetYourMother.quote,
+    concept: Faker::Commerce.product_name,
     date: Faker::Time.between(DateTime.now, DateTime.now.months_ago(6)),
-    amount: Faker::Number.between(1, 5000000)
+    amount: Faker::Number.between(1, 50000)
   )
   a.save
 end
