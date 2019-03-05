@@ -27,9 +27,9 @@ For multiple filters you have to use "&" yo split the filters, example: https://
 
 * Filter by day: %PATH%__day__=[dayNumber] ---> you get all registers by day number
 
-* Filter by beginDate: %PATH%__beginDate__=[date] --->format: dd/mm/yyyy or dd-mm-yyyy , you get all registers by beginDate
+* Filter by begin date: %PATH%__begindate__=[date] --->format: dd/mm/yyyy or dd-mm-yyyy , you get all registers by beginDate
 
-* Filter by endDate: %PATH%__endDate__=[date] --->format: dd/mm/yyyy or dd-mm-yyyy , you get all registers by endDate
+* Filter by end date: %PATH%__enddate__=[date] --->format: dd/mm/yyyy or dd-mm-yyyy , you get all registers by endDate
 
 * Filter by concept: %PATH%__concept__=[concept] ---> you get all registers by day concept 
 
